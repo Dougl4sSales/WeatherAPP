@@ -1,0 +1,45 @@
+@model List<WeatherApp.Models.WeatherData>
+@{
+    ViewBag.Title = "Dashboard";
+}
+
+<h2>Clima em @ViewBag.City</h2>
+
+<form method="get">
+    <label for="city">Cidade:</label>
+    <select name="city" id="city">
+        <option value="São Paulo">São Paulo</option>
+        <option value="Curitiba">Curitiba</option>
+        <option value="Rio de Janeiro">Rio de Janeiro</option>
+        <option value="Brasília">Brasília</option>
+        <option value="Salvador">Salvador</option>        
+    </select>
+
+    <label for="start">De:</label>
+    <input type="date" name="start" />
+    <label for="end">Até:</label>
+    <input type="date" name="end" />
+    <button type="submit">Filtrar</button>
+</form>
+
+<table>
+    <thead>
+        <tr>
+            <th>Data</th>
+            <th>Temp. Mín</th>
+            <th>Temp. Máx</th>
+            <th>Descrição</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Date</td>
+                <td>@item.TemperatureMin °C</td>
+                <td>@item.TemperatureMax °C</td>
+                <td>@item.Description</td>
+            </tr>
+        }
+    </tbody>
+</table>
