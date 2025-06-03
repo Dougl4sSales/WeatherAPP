@@ -10,9 +10,11 @@ namespace WeatherApp
     {
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllersWithViews();
             services.AddDbContext<AppDbContext>(options => options.UseInMemoryDatabase("WeatherDb"));
             services.AddScoped<WeatherService>();
+            services.AddHostedService<WeatherBackgroundService>();
+            services.AddControllersWithViews();
+
         }
 
         public void Configure(IApplicationBuilder app)
