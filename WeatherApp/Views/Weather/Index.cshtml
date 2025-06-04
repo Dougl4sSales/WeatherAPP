@@ -46,7 +46,7 @@
             @foreach (var item in Model)
             {
                 <tr>
-                    <td>@item.Date</td>
+                    <td>@item.Date.ToString("dd/MM/yyyy")</td>
                     <td>@item.TemperatureMin °C</td>
                     <td>@item.TemperatureMax °C</td>
                     <td>@item.Description</td>
@@ -54,6 +54,38 @@
             }
         </tbody>
     </table>
+
+<!-- Primeiro DashBoard TempMaxx e TempMin -->
+    @if (Model != null && Model.Any())
+    {
+        var item = Model.First();
+
+        <div class="dashboard">
+            <h1>Temperatura de @ViewBag.City</h1>
+            <p class="temp-label">Data: @item.Date.ToString("dd/MM/yyyy")</p>
+            <p class="temp-label">Descrição: @item.Description</p>
+
+            <div class="bar-vertical">
+                <div class="bar-wrapper">
+                    <div class="bar min" style="height:@(item.TemperatureMin * 4)px">
+                        <span>@item.TemperatureMin°C</span>
+                    </div>
+                    <label>Temp. Mín</label>
+                </div>
+
+                <div class="bar-wrapper">
+                    <div class="bar max" style="height:@(item.TemperatureMax * 4)px">
+                        <span>@item.TemperatureMax°C</span>
+                    </div>
+                    <label>Temp. Máx</label>
+                </div>
+            </div>
+        </div>
+    }
+    else
+    {
+        <h3>Nenhum dado disponível.</h3>
+    }
 
 </body>
 </html>
