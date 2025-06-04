@@ -1,45 +1,59 @@
 @model List<WeatherApp.Models.WeatherData>
 @{
-    ViewBag.Title = "Dashboard";
+    ViewBag.Title = "WEATHER-APP";
 }
 
-<h2>Clima em @ViewBag.City</h2>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>@ViewBag.Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="/css/style.css" asp-append-version="true" />
+</head>
 
-<form method="get">
-    <label for="city">Cidade:</label>
-    <select name="city" id="city">
-        <option value="São Paulo">São Paulo</option>
-        <option value="Curitiba">Curitiba</option>
-        <option value="Rio de Janeiro">Rio de Janeiro</option>
-        <option value="Brasília">Brasília</option>
-        <option value="Salvador">Salvador</option>        
-    </select>
+<body>
 
-    <label for="start">De:</label>
-    <input type="date" name="start" />
-    <label for="end">Até:</label>
-    <input type="date" name="end" />
-    <button type="submit">Filtrar</button>
-</form>
+    <h2>Clima em @ViewBag.City</h2>
 
-<table>
-    <thead>
-        <tr>
-            <th>Data</th>
-            <th>Temp. Mín</th>
-            <th>Temp. Máx</th>
-            <th>Descrição</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
+    <form method="get">
+        <label for="city">Cidade:</label>
+        <select name="city" id="city">
+            <option value="São Paulo">São Paulo</option>
+            <option value="Curitiba">Curitiba</option>
+            <option value="Rio de Janeiro">Rio de Janeiro</option>
+            <option value="Brasília">Brasília</option>
+            <option value="Salvador">Salvador</option>        
+        </select>
+
+        <label for="start">De:</label>
+        <input type="date" name="start" />
+        <label for="end">Até:</label>
+        <input type="date" name="end" />
+        <button type="submit">Filtrar</button>
+    </form>
+
+    <table>
+        <thead>
             <tr>
-                <td>@item.Date</td>
-                <td>@item.TemperatureMin °C</td>
-                <td>@item.TemperatureMax °C</td>
-                <td>@item.Description</td>
+                <th>Data</th>
+                <th>Temp. Mín</th>
+                <th>Temp. Máx</th>
+                <th>Descrição</th>
             </tr>
-        }
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.Date</td>
+                    <td>@item.TemperatureMin °C</td>
+                    <td>@item.TemperatureMax °C</td>
+                    <td>@item.Description</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+</body>
+</html>

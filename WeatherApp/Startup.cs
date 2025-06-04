@@ -20,6 +20,7 @@ namespace WeatherApp
         public void Configure(IApplicationBuilder app)
         {
             app.UseStaticFiles();
+            app.UseStaticFiles();
             app.UseRouting();
             app.UseEndpoints(endpoints =>
             {

@@ -15,7 +15,7 @@ namespace WeatherApp.Controllers
             _weatherService = weatherService;
         }
 
-        public async Task<IActionResult> Index(string city = "São Paulo", DateTime? start = null, DateTime? end = null)
+        public async Task<IActionResult> Index(string city = "Curitiba", DateTime? start = null, DateTime? end = null)
         {
             await _weatherService.GetWeatherAsync(city);
             var data = _weatherService.GetHistory(city, start, end).OrderByDescending(w => w.Date).ToList();

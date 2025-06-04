@@ -36,15 +36,14 @@ namespace WeatherApp.Services
                             await weatherService.GetWeatherAsync(city);
                         }
                         catch (Exception ex)
-                        {
-                            // Loga o erro se quiser
+                        {                            
                             Console.WriteLine($"Erro ao consultar clima de {city}: {ex.Message}");
                         }
                     }
                 }
 
                 // Aguarda 15 minutos
-                //await Task.Delay(TimeSpan.FromSeconds(10), stoppingToken);
+                // await Task.Delay(TimeSpan.FromSeconds(30), stoppingToken);
                 await Task.Delay(TimeSpan.FromMinutes(15), stoppingToken);
             }
         }
