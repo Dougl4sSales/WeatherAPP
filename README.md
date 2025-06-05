@@ -1,6 +1,6 @@
 # 🌤️ Aplicação de Previsão do Tempo
 
-Esta aplicação web exibe a previsão do tempo para os próximos 3 dias de uma cidade escolhida. Utiliza a API da **OpenWeather** e está desenvolvida com **.NET (C#)** no padrão **MVC**, com frontend responsivo em HTML/CSS.
+Esta aplicação web exibe a previsão do tempo atual de uma cidade escolhida. Utiliza a API da **OpenWeather** e está desenvolvida com **.NET (C#)** no padrão **MVC**, com frontend em HTML/CSS. Ela está programada para enviar requisições a cada 15 minutos e persistir em banco de memoria.
 
 ---
 
@@ -30,6 +30,67 @@ Esta aplicação web exibe a previsão do tempo para os próximos 3 dias de uma 
 - `docker-compose.yml` – orquestração dos containers.
 
 ---
+## ⚙️ Arquitetura Lógica
+
+
+                 +----------------+
+                 |     Usuário    |
+                 +----------------+
+                          |
+                          v
+               +---------------------+
+               |     Controlador     | <------+
+               +---------------------+        |
+                          |                  (Requisição GET)
+                          v                   |
+               +---------------------+        |
+               |       Modelo        |        |
+               +---------------------+        |
+                          |                   |
+                          v                   |
+               +---------------------+        |
+               | API de Previsão do  |        |
+               |      Tempo (        | <------+
+               |  OpenWeatherMap API)|
+               +---------------------+
+                          |
+                          v
+               +---------------------+
+               |      Modelo         | (Mapeia dados recebidos)
+               +---------------------+
+                          |
+                          v
+               +---------------------+
+               |     Visão (View)    | --> HTML/CSS Responsivo
+               +---------------------+
+                          |
+                          v
+                 +----------------+
+                 |     Usuário    |
+                 +----------------+
+
+---
+## ⚙️ Arquitetura Física
+
++------------------------+           +-------------------------+
+|   Navegador Web        |           | Servidor .NET MVC       |
+| (Usuário final)        |           | (Docker container)       |
+|                        | <-------> |                         |
+| - Requisições HTTP     |           | - Controller             |
+| - Interface HTML/CSS   |           | - View (HTML)      |
++------------------------+           | - Model (C# classes)     |
+                                     |                         |
+                                     | - Serviço HTTP Client    |
+                                     |   que consome a API      |
+                                     +-------------+-----------+
+                                                   |
+                                                   v
+                                     +---------------------------+
+                                     | API de Clima Externa      |
+                                     | (OpenWeather)    |
+                                     |                           |
+                                     +---------------------------+
+
 
 ## 🚀 Como Executar com Docker Compose
 
