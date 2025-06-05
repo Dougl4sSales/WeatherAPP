@@ -94,6 +94,29 @@ else
 {
     <h3>Nenhum dado disponível.</h3>
 }
+
+    <!-- Estrutura de tabelas para verificação das requests -->
+        @* <table>
+        <thead>
+            <tr>
+                <th>Data</th>
+                <th>Temp. Mín</th>
+                <th>Temp. Máx</th>
+                <th>Descrição</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.Date.ToString("dd/MM/yyyy")</td>
+                    <td>@item.TemperatureMin °C</td>
+                    <td>@item.TemperatureMax °C</td>
+                    <td>@item.Description</td>
+                </tr>
+            }
+        </tbody>
+        </table>   *@
     </div>
     <footer>Weather Service</footer>
 
