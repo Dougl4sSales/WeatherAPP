@@ -13,9 +13,8 @@
 </head>
 
 <body>
-
-    <h2>Clima em @ViewBag.City</h2>
-
+    <header>Monitoramento do Tempo OpenWeather</header>
+    
     <form method="get">
         <label for="city">Cidade:</label>
         <select name="city" id="city">
@@ -26,10 +25,8 @@
             <option value="Salvador">Salvador</option>        
         </select>
         <button type="submit">Atualizar</button>
-    </form>
+    </form>  
     
-    @* <div class="dashboard-container"></div> *@
-
 @if (Model != null && Model.Any())
 {
     var item = Model.First();
@@ -97,6 +94,8 @@ else
 {
     <h3>Nenhum dado disponível.</h3>
 }
-</div>
+    </div>
+    <footer>Weather Service</footer>
+
 </body>
 </html>

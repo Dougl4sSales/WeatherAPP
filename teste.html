@@ -1,0 +1,21 @@
+<table>
+    <thead>
+        <tr>
+            <th>Data</th>
+            <th>Temp. Mín</th>
+            <th>Temp. Máx</th>
+            <th>Descrição</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Date.ToString("dd/MM/yyyy")</td>
+                <td>@item.TemperatureMin °C</td>
+                <td>@item.TemperatureMax °C</td>
+                <td>@item.Description</td>
+            </tr>
+        }
+    </tbody>
+</table>  
