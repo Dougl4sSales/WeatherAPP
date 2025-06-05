@@ -30,6 +30,13 @@ Esta aplicação web exibe a previsão do tempo atual de uma cidade escolhida. U
 - `docker-compose.yml` – orquestração dos containers.
 
 ---
+
+## 📦 Tela do Usuario
+
+![Tela Index](Docs/Img/TelaIndex.png)
+
+
+---
 ## ⚙️ Arquitetura Lógica
 
 
