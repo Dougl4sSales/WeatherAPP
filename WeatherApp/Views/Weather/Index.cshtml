@@ -19,51 +19,39 @@
     <form method="get">
         <label for="city">Cidade:</label>
         <select name="city" id="city">
-            <option value="São Paulo">São Paulo</option>
             <option value="Curitiba">Curitiba</option>
-            <option value="Rio de Janeiro">Rio de Janeiro</option>
             <option value="Brasília">Brasília</option>
+            <option value="Rio de Janeiro">Rio de Janeiro</option>
+            <option value="São Paulo">São Paulo</option>
             <option value="Salvador">Salvador</option>        
         </select>
-
-        <label for="start">De:</label>
-        <input type="date" name="start" />
-        <label for="end">Até:</label>
-        <input type="date" name="end" />
-        <button type="submit">Filtrar</button>
+        <button type="submit">Atualizar</button>
     </form>
+    
+    @* <div class="dashboard-container"></div> *@
 
-    <table>
-        <thead>
-            <tr>
-                <th>Data</th>
-                <th>Temp. Mín</th>
-                <th>Temp. Máx</th>
-                <th>Descrição</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in Model)
-            {
-                <tr>
-                    <td>@item.Date.ToString("dd/MM/yyyy")</td>
-                    <td>@item.TemperatureMin °C</td>
-                    <td>@item.TemperatureMax °C</td>
-                    <td>@item.Description</td>
-                </tr>
-            }
-        </tbody>
-    </table>
+@if (Model != null && Model.Any())
+{
+    var item = Model.First();
 
-<!-- Primeiro DashBoard TempMaxx e TempMin -->
-    @if (Model != null && Model.Any())
-    {
-        var item = Model.First();
-
+    <div style="display: flex; gap: 40px;">
+        <!-- DASHBOARD Temp. Atual -->
         <div class="dashboard">
-            <h1>Temperatura de @ViewBag.City</h1>
+            <h1>Tempo Atual</h1>
+            <p class="temp-label">@ViewBag.City</p>
             <p class="temp-label">Data: @item.Date.ToString("dd/MM/yyyy")</p>
-            <p class="temp-label">Descrição: @item.Description</p>
+            <p class="temp-label">@item.Description</p>
+
+            <div style="text-align: center; margin-top: 20px;">
+                <img src="@($"https://openweathermap.org/img/wn/{item.Icon}@2x.png")" alt="Ícone do tempo" />
+                <p class="temp-label" style="font-size: 24px; font-weight: bold; margin-top: 10px;">@item.Temperatura.ToString("F2")°C</p>
+            </div>
+        </div>
+        <!-- DASHBOARD 2: Temp. Min e Max -->
+        <div class="dashboard">            
+            <h1>Variação de Temperatura do Dia</h1>
+            <p class="temp-label">TempMin: @item.TemperatureMin°C</p>
+            <p class="temp-label">TempMax: @item.TemperatureMax°C</p>
 
             <div class="bar-vertical">
                 <div class="bar-wrapper">
@@ -81,11 +69,34 @@
                 </div>
             </div>
         </div>
-    }
-    else
-    {
-        <h3>Nenhum dado disponível.</h3>
-    }
+        <!-- DASHBOARD 3: Temp. Atual vs Sensação -->
+        <div class="dashboard">            
+            <h1>Sensação Térmica</h1>
+            <p class="temp-label">Temp. Atual: @item.Temperatura°C</p>
+            <p class="temp-label">Sencação @item.SensacaoTermica°C</p>
 
+            <div class="bar-vertical">
+                <div class="bar-wrapper">
+                    <div class="bar min" style="height:@(item.Temperatura * 4)px">
+                        <span>@item.Temperatura°C</span>
+                    </div>
+                    <label>Temp. Atual</label>
+                </div>
+
+                <div class="bar-wrapper">
+                    <div class="bar max" style="height:@(item.SensacaoTermica * 4)px">
+                        <span>@item.SensacaoTermica°C</span>
+                    </div>
+                    <label>Sensação</label>
+                </div>
+            </div>
+        </div>
+    </div>    
+}
+else
+{
+    <h3>Nenhum dado disponível.</h3>
+}
+</div>
 </body>
 </html>

@@ -32,9 +32,12 @@ namespace WeatherApp.Services
             {
                 City = city,
                 Date = DateTime.Now,
+                Temperatura = root.GetProperty("main").GetProperty("temp").GetDouble(),
+                SensacaoTermica = root.GetProperty("main").GetProperty("feels_like").GetDouble(),
                 TemperatureMin = root.GetProperty("main").GetProperty("temp_min").GetDouble(),
                 TemperatureMax = root.GetProperty("main").GetProperty("temp_max").GetDouble(),
-                Description = root.GetProperty("weather")[0].GetProperty("description").GetString() ?? "Sem descrição"
+                Description = root.GetProperty("weather")[0].GetProperty("description").GetString() ?? "Sem descrição",   
+                Icon = root.GetProperty("weather")[0].GetProperty("icon").GetString() ?? "01d"             
             };
 
             _context.Weather.Add(data);
